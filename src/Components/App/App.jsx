@@ -1,7 +1,6 @@
 /* eslint-disable import/no-anonymous-default-export */
 import React from 'react';
 import Home from '../Home/Home';
-import About from '../About/About';
 import Login from '../Login/Login';
 import Movies from '../Movies/Movies';
 import Navbar from '../Navbar/Navbar';
@@ -15,6 +14,11 @@ import { useState } from 'react';
 import jwtDecode from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import MovieDetails from './../MovieDetails/MovieDetails';
+import { MediaContextProvider } from '../MediaContext';
+import Networks from './../Networks/Networks';
+import TvDetails from '../TvDetails/TvDetails';
+import PeopleDetails from '../PeopleDetails/PeopleDetails';
 export default function 
 () {
   const[userData, setUserData]= useState(null);
@@ -52,17 +56,28 @@ export default function
     <>
       <Navbar userData={userData} logOut={logOut}/>
      <div className="container">
+       <MediaContextProvider>
      <Routes>
         <Route path='/' element={<Home/>}/>
         <Route path='home' element={<ProtectedRoute><Home/></ProtectedRoute>}/>
-        <Route path='about' element= {<ProtectedRoute><About/></ProtectedRoute>}/>
         <Route path='movies' element={<ProtectedRoute><Movies/></ProtectedRoute>}/>
+        <Route path='movieDetails' element={<ProtectedRoute><MovieDetails/></ProtectedRoute>}>
+          <Route path=':id' element={<MovieDetails/>}/>
+        </Route>
         <Route path='tvshows' element={<ProtectedRoute><TvShow/></ProtectedRoute>}/>
+        <Route path='tvDetails' element={<ProtectedRoute><TvDetails/></ProtectedRoute>}>
+          <Route path=':id' element={<TvDetails/>}/>
+        </Route>
         <Route path='people' element={<ProtectedRoute> <People/></ProtectedRoute>}/>
+        <Route path='peopleDetails' element={<ProtectedRoute><PeopleDetails/></ProtectedRoute>}>
+          <Route path=':id' element={<PeopleDetails/>}/>
+        </Route>
+        <Route path='networks' element={<ProtectedRoute> <Networks/></ProtectedRoute>}/>
         <Route path='login' element={<Login getUserData={getUserData}/>}/>
         <Route path='register' element={<Register/>}/>
         <Route path='*' element={<NotFound/>}/>
       </Routes>
+      </MediaContextProvider>
      </div>
     </>
   )

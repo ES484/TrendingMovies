@@ -58,9 +58,9 @@ function validateLoginForm(user)
     <>
     <h2>Login Now</h2>
     {errorList.map((error, index)=> {
-      if(index===4)
+      if(error.message.includes("password"))
       {
-        return <div key={index} className='alert alert-danger'>password invalid</div>
+        return <div key={index} className='alert alert-danger'>Password invalid</div>
       }
       else{
     return <div key={index} className='alert alert-danger'>{error.message}</div>

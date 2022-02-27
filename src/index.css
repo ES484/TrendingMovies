@@ -27,4 +27,17 @@ a, a:hover
 {
     color: #949cb0;
 }
+span
+{
+  cursor: pointer;
+}
+.brdr
+{
+    height: 1px;
+    background-color: #a8a8a83d;
+}
+.detailsImg
+{
+  height: 400px !important;
+}
 
